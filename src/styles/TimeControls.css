@@ -1,0 +1,29 @@
+.TimeControls button {
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  background: inherit;
+  -webkit-box-shadow: 0 0 0 1px var(--color-theme-white), 0 0 0 3px var(--color-theme-light);
+          box-shadow: 0 0 0 1px var(--color-theme-white), 0 0 0 3px var(--color-theme-light);
+  border: none;
+  outline: none;
+  color: var(--color-theme-light);
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.TimeControls button:hover,
+.TimeControls button:focus {
+  -webkit-box-shadow: 0 0 0 2px var(--color-theme-white), 0 0 0 7px var(--color-theme-light);
+          box-shadow: 0 0 0 2px var(--color-theme-white), 0 0 0 7px var(--color-theme-light);
+}
+.TimeControls button:active {
+  background: var(--color-theme-light);
+  color: var(--color-theme-white);
+  -webkit-transform: scaleX(1.2) scaleY(1.08);
+          transform: scaleX(1.2) scaleY(1.08);
+}
+.TimeControls button svg {
+  width: 80%;
+  height: 80%;
+  fill: currentColor;
+}
