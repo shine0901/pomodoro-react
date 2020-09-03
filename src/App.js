@@ -5,8 +5,8 @@ import TimeControls from './components/TimeControls';
 import TimeLeft from './components/TimeLeft';
 
 const DEFAULT = {
-  breakTime: 5,
-  workingTime: 25
+  breakTime: 1,
+  workingTime: 1
 };
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
   const isRun = intervalId !== null;
 
   useEffect(() => {
-    if(duration === 0) {
+    if(duration < 0) {
       audioElement.current.play();
       if (process === 'Session') {
         setProcess('Break');
@@ -63,7 +63,7 @@ function App() {
     } else {
       const newIntervalId = setInterval(() => {
         setDuration(preDuration => preDuration - 1);
-      }, 1000);
+      }, 100);
       setIntervalId(newIntervalId);
     }
   };
