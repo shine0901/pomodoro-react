@@ -3,7 +3,7 @@ import React from 'react';
 const TimeInput = (props) => {
   return (
     <div className="TimeInput">
-      <label>{props.label} session</label>
+      <label>{props.label}</label>
       <div>
         <button onClick={props.increment}>+</button>
         <h2>{props.value}</h2>

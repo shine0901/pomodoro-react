@@ -5,8 +5,8 @@ import TimeControls from './components/TimeControls';
 import TimeLeft from './components/TimeLeft';
 
 const DEFAULT = {
-  breakTime: 1,
-  workingTime: 1
+  breakTime: 5,
+  workingTime: 25
 };
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
     } else {
       const newIntervalId = setInterval(() => {
         setDuration(preDuration => preDuration - 1);
-      }, 100);
+      }, 1000);
       setIntervalId(newIntervalId);
     }
   };
@@ -100,10 +100,12 @@ function App() {
         startPauseTimer={handleStartPauseTimer}
         resetTimer={handleResetTimer} />
       <TimeInput
+        label="work"
         value={workingTime}
         increment={incrementWorking}
         decrement={decrementWorking} />
       <TimeInput
+        label="break"
         value={breakTime}
         increment={incrementBreak}
         decrement={decrementBreak} />
