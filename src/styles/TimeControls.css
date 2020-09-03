@@ -1,3 +1,10 @@
+.TimeControls {
+  width: 10rem;
+  margin: 0 auto;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: space-between;
+}
 .TimeControls button {
   width: 4.25rem;
   height: 4.25rem;

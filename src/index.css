@@ -127,3 +127,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+:root {
+  --color-theme-white: #fff;
+  --color-theme-light: #d15c5c;
+}
