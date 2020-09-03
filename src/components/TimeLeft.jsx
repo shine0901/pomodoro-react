@@ -7,12 +7,11 @@ const TimeLeft = (props) => {
     <div className="TimeLeft">
       <h2>{props.process}</h2>
       <h2>
-        {minutes >= 10 ? minutes : `0${minutes}`}
-        :
+        {minutes >= 10 ? minutes : `0${minutes}`}:
         {seconds >= 10 ? seconds : `0${seconds}`}
       </h2>
     </div>
   );
-}
+};
 
 export default TimeLeft;

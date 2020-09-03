@@ -11,6 +11,6 @@ const TimeInput = (props) => {
       </div>
     </div>
   );
-}
+};
 
 export default TimeInput;

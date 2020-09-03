@@ -5,50 +5,49 @@ import TimeControls from './components/TimeControls';
 import TimeLeft from './components/TimeLeft';
 
 const DEFAULT = {
-  breakTime: 1,
-  workingTime: 1
+  breakTime: 5,
+  workTime: 25,
 };
 
 function App() {
   const audioElement = useRef(null);
   const [breakTime, setBreakTime] = useState(DEFAULT.breakTime);
-  const [workingTime, setWorkingTime] = useState(DEFAULT.workingTime);
-  const [duration, setDuration] = useState(DEFAULT.workingTime * 60);
-  const [process, setProcess] = useState("Session");
+  const [workTime, setWorkTime] = useState(DEFAULT.workTime);
+  const [duration, setDuration] = useState(DEFAULT.workTime * 60);
+  const [process, setProcess] = useState('Session');
   const [intervalId, setIntervalId] = useState(null);
   const isRun = intervalId !== null;
 
   useEffect(() => {
-    if(duration < 0) {
+    if (duration < 0) {
       audioElement.current.play();
       if (process === 'Session') {
         setProcess('Break');
         setDuration(breakTime * 60);
-      }
-      else {
+      } else {
         setProcess('Session');
-        setDuration(workingTime * 60);
+        setDuration(workTime * 60);
       }
     }
-  }, [duration, process, workingTime, breakTime]);
+  }, [duration, process, workTime, breakTime]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPress);
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, []);
 
-  const incrementWorking = () => {
-    const temp = workingTime <= 59 ? workingTime + 1 : 60;
-    setWorkingTime(temp);
+  const incrementWork = () => {
+    const temp = workTime <= 59 ? workTime + 1 : 60;
+    setWorkTime(temp);
     setDuration(temp * 60);
   };
   const incrementBreak = () => {
     const temp = breakTime <= 59 ? breakTime + 1 : 60;
     setBreakTime(temp);
   };
-  const decrementWorking = () => {
-    const temp = workingTime - 1 || 1;
-    setWorkingTime(temp);
+  const decrementWork = () => {
+    const temp = workTime - 1 || 1;
+    setWorkTime(temp);
     setDuration(temp * 60);
   };
   const decrementBreak = () => {
@@ -62,7 +61,7 @@ function App() {
       setIntervalId(null);
     } else {
       const newIntervalId = setInterval(() => {
-        setDuration(preDuration => preDuration - 1);
+        setDuration((preDuration) => preDuration - 1);
       }, 100);
       setIntervalId(newIntervalId);
     }
@@ -73,9 +72,9 @@ function App() {
     clearInterval(intervalId);
     setIntervalId(null);
     setProcess('Session');
-    setWorkingTime(DEFAULT.workingTime);
+    setWorkTime(DEFAULT.workTime);
     setBreakTime(DEFAULT.breakTime);
-    setDuration(DEFAULT.workingTime * 60);
+    setDuration(DEFAULT.workTime * 60);
   };
 
   const handleKeyPress = (e) => {
@@ -86,29 +85,33 @@ function App() {
     } else {
       return;
     }
-  }
+  };
 
   return (
     <div className="App">
-      <TimeLeft
-        process={process}
-        duration={duration} />
+      <TimeLeft process={process} duration={duration} />
       <TimeControls
         isRun={isRun}
         startPauseTimer={handleStartPauseTimer}
-        resetTimer={handleResetTimer} />
+        resetTimer={handleResetTimer}
+      />
       <TimeInput
         label="work"
-        value={workingTime}
-        increment={incrementWorking}
-        decrement={decrementWorking} />
+        value={workTime}
+        increment={incrementWork}
+        decrement={decrementWork}
+      />
       <TimeInput
         label="break"
         value={breakTime}
         increment={incrementBreak}
-        decrement={decrementBreak} />
+        decrement={decrementBreak}
+      />
       <audio ref={audioElement}>
-        <source src="http://www.peter-weinberg.com/files/1014/8073/6015/BeepSound.wav" type="audio/wav"/>
+        <source
+          src="http://www.peter-weinberg.com/files/1014/8073/6015/BeepSound.wav"
+          type="audio/wav"
+        />
       </audio>
     </div>
   );
