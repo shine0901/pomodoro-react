@@ -19,10 +19,6 @@ function App() {
   const isRun = intervalId !== null;
 
   useEffect(() => {
-    setDuration(workingTime * 60);
-  }, [workingTime]);
-
-  useEffect(() => {
     if(duration === 0) {
       audioElement.current.play();
       if (process === 'Session') {
@@ -44,6 +40,7 @@ function App() {
   const incrementWorking = () => {
     const temp = workingTime <= 59 ? workingTime + 1 : 60;
     setWorkingTime(temp);
+    setDuration(temp * 60);
   };
   const incrementBreak = () => {
     const temp = breakTime <= 59 ? breakTime + 1 : 60;
@@ -52,6 +49,7 @@ function App() {
   const decrementWorking = () => {
     const temp = workingTime - 1 || 1;
     setWorkingTime(temp);
+    setDuration(temp * 60);
   };
   const decrementBreak = () => {
     const temp = breakTime - 1 || 1;
