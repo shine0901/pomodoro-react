@@ -9,18 +9,18 @@ const DEFAULT = {
   workTime: 25,
 };
 
-function App() {
-  const audioElement = useRef(null);
+const App: React.FC = () => {
+  const audioElement = useRef<HTMLAudioElement>(null);
   const [breakTime, setBreakTime] = useState(DEFAULT.breakTime);
   const [workTime, setWorkTime] = useState(DEFAULT.workTime);
   const [duration, setDuration] = useState(DEFAULT.workTime * 60);
   const [process, setProcess] = useState('Session');
-  const [intervalId, setIntervalId] = useState(null);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const isRun = intervalId !== null;
 
   useEffect(() => {
     if (duration < 0) {
-      audioElement.current.play();
+      audioElement?.current?.play();
       if (process === 'Session') {
         setProcess('Break');
         setDuration(breakTime * 60);
@@ -57,7 +57,9 @@ function App() {
 
   const handleStartPauseTimer = () => {
     if (isRun) {
-      clearInterval(intervalId);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
       setIntervalId(null);
     } else {
       const newIntervalId = setInterval(() => {
@@ -68,8 +70,10 @@ function App() {
   };
 
   const handleResetTimer = () => {
-    audioElement.current.load();
-    clearInterval(intervalId);
+    audioElement?.current?.load();
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
     setIntervalId(null);
     setProcess('Session');
     setWorkTime(DEFAULT.workTime);
@@ -77,7 +81,7 @@ function App() {
     setDuration(DEFAULT.workTime * 60);
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: KeyboardEvent) => {
     if (e.keyCode === 80) {
       alert('Play');
     } else if (e.keyCode === 82) {
@@ -115,6 +119,6 @@ function App() {
       </audio>
     </div>
   );
-}
+};
 
 export default App;

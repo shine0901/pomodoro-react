@@ -1,11 +1,15 @@
 import React from 'react';
 import '../styles/TimeControls.css';
 
-const TimeControls = (props) => {
+const TimeControls: React.FC<Props> = ({
+  isRun,
+  startPauseTimer,
+  resetTimer,
+}) => {
   return (
     <div className="TimeControls">
-      <button onClick={props.startPauseTimer}>
-        {props.isRun ? (
+      <button onClick={startPauseTimer}>
+        {isRun ? (
           <svg viewBox="0 0 100 100">
             <rect x="25" y="25" width="15" height="50" />
             <rect x="60" y="25" width="15" height="50" />
@@ -16,13 +20,19 @@ const TimeControls = (props) => {
           </svg>
         )}
       </button>
-      <button onClick={props.resetTimer}>
+      <button onClick={resetTimer}>
         <svg viewBox="0 0 100 100">
           <rect x="25" y="25" width="50" height="50" />
         </svg>
       </button>
     </div>
   );
+};
+
+type Props = {
+  isRun: boolean;
+  startPauseTimer: () => void;
+  resetTimer: () => void;
 };
 
 export default TimeControls;
